@@ -1,7 +1,8 @@
 {
   "name": "mygallery",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

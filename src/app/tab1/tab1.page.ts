@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { DocumentViewer,DocumentViewerOptions} from '@ionic-native/document-viewer/ngx';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -7,6 +7,18 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  constructor(
+    private document: DocumentViewer
+  ) {}
+
+
+
+  open(){
+    const options: DocumentViewerOptions = {
+      title: 'My PDF'
+    }
+    this.document.viewDocument('https://firebasestorage.googleapis.com/v0/b/fir-10218.appspot.com/o/ticket.pdf?alt=media&token=4881b315-6033-459d-8a57-dbd66fb331aa', 'application/pdf', options);
+    
+  }
 
 }
