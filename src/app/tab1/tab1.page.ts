@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DocumentViewer,DocumentViewerOptions} from '@ionic-native/document-viewer/ngx';
+import {PhotosService} from '../services/photos.service';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -8,11 +9,14 @@ import { DocumentViewer,DocumentViewerOptions} from '@ionic-native/document-view
 export class Tab1Page {
 
   constructor(
-    private document: DocumentViewer
+    private document: DocumentViewer,
+    public photoService:PhotosService
   ) {}
 
 
-
+add(){
+  this.photoService.addUser();
+}
   open(){
     const options: DocumentViewerOptions = {
       title: 'My PDF'

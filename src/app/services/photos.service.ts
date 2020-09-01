@@ -3,6 +3,10 @@ import {Plugins,CameraResultType,Capacitor,FilesystemDirectory,CameraPhoto,Camer
 const { Camera, Filesystem, Storage } = Plugins;
 import { Photos } from '../interfaces/photos';
 import { Platform } from '@ionic/angular';
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,13 +14,21 @@ export class PhotosService {
   public photos:Array<Photos> = [];
   private PHOTO_STORAGE: string = "photos";
   public is_platform:any=null;
-
+   public cd_storage:any;
   constructor(
+    
     public platform:Platform
   ) { 
       this.is_platform = platform;
+      this.cd_storage = firebase.firestore();
   }
-
+addUser(){
+  this.cd_storage.collection("user").add({"name":"apple"}).then((data)=>{
+    console.log(data);
+  }).catch(e=>{
+    console.log(e);
+  });
+}
   public async addNewToGallery() {
     // Take a photo
     const capturedPhoto = await Camera.getPhoto({
