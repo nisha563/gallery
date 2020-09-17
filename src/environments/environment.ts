@@ -5,14 +5,20 @@
 export const environment = {
   production: false,
    firebaseConfig:{
-    apiKey: "AIzaSyDTs99Adg6cEkUIEg2fgtN807PmXFn-4W4",
-    authDomain: "mtgallery-b3088.firebaseapp.com",
-    databaseURL: "https://mtgallery-b3088.firebaseio.com",
-    projectId: "mtgallery-b3088",
-    storageBucket: "mtgallery-b3088.appspot.com",
-    messagingSenderId: "699844588275",
-    appId: "1:699844588275:web:490770d8522e3bfca17d86",
-    measurementId: "G-FNF7GF4NPZ"
+    apiKey: "AIzaSyCJ0wTHkf_hwLgipKY6Xfz3dSKGES1wo2M",
+    authDomain: "restaurant-27f85.firebaseapp.com",
+    databaseURL: "https://restaurant-27f85.firebaseio.com",
+    projectId: "restaurant-27f85",
+    storageBucket: "restaurant-27f85.appspot.com",
+    messagingSenderId: "143222487121"
+    // apiKey: "AIzaSyDTs99Adg6cEkUIEg2fgtN807PmXFn-4W4",
+    // authDomain: "mtgallery-b3088.firebaseapp.com",
+    // databaseURL: "https://mtgallery-b3088.firebaseio.com",
+    // projectId: "mtgallery-b3088",
+    // storageBucket: "mtgallery-b3088.appspot.com",
+    // messagingSenderId: "699844588275",
+    // appId: "1:699844588275:web:490770d8522e3bfca17d86",
+    // measurementId: "G-FNF7GF4NPZ"
   }
   
 };

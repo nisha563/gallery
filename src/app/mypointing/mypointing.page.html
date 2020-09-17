@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>mypointing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding no-bounce>
+  <div #fixedContainer ion-fixed>
+    <ion-grid>
+  <ion-row>
+    <ion-row>
+    <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" 
+    tappable (click)="selectedColor(color)">
+
+    </ion-col>
+    </ion-row>
+    <!-- <ion-row radio-group [(ngModel)]="selected_color">
+      <ion-col *ngFor="let color of colors" text-center>
+              <ion-radio [value]="color"></ion-radio>
+      </ion-col>
+    </ion-row> -->
+  </ion-row>
+  </ion-grid>
+  <canvas class="convas"  #canvas (touchstart)="touchStart($event)" (touchmove)="touchMove($event)"></canvas>
+  <ion-button color="secondary" (click)="saveImage()">save Image</ion-button>
+  </div>
+<ion-list *ngIf="stored_images.length>0">
+  <ion-list-header>all images</ion-list-header>
+    <ion-card *ngFor="let obj of stored_images ; let i=index">
+        <ion-card-content>
+          <img [src]="getImagePath(obj)">
+        </ion-card-content>
+        <ion-row>
+          <ion-button color="danger" (click)="removeImageAtIndex(i)">
+            <ion-icon name="trash">
+
+            </ion-icon>
+          </ion-button>
+        </ion-row>
+    </ion-card>
+</ion-list>
+</ion-content>
