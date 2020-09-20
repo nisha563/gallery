@@ -24,7 +24,7 @@
   <canvas class="convas"  #canvas (touchstart)="touchStart($event)" (touchmove)="touchMove($event)"></canvas>
   <ion-button color="secondary" (click)="saveImage()">save Image</ion-button>
   </div>
-<ion-list *ngIf="stored_images.length>0">
+<ion-list *ngIf="stored_images && stored_images.length>0">
   <ion-list-header>all images</ion-list-header>
     <ion-card *ngFor="let obj of stored_images ; let i=index">
         <ion-card-content>

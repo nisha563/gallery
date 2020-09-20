@@ -3,6 +3,8 @@ import {Plugins,CameraResultType,Capacitor,FilesystemDirectory,CameraPhoto,Camer
 const { Camera, Filesystem, Storage } = Plugins;
 import { Photos } from '../interfaces/photos';
 import { Platform } from '@ionic/angular';
+
+
 // import * as firebase from 'firebase/app';
 // import 'firebase/storage';
 // import 'firebase/firestore';

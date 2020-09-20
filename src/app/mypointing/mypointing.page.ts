@@ -1,6 +1,8 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import {IonContent, Platform} from '@ionic/angular';
-
+import { off } from 'process';
+import { Storage } from '@ionic/storage';
+import { File } from '@ionic-native/file/ngx';
 @Component({
   selector: 'app-mypointing',
   templateUrl: './mypointing.page.html',
@@ -20,15 +22,21 @@ public saveY:number;
 public stored_images:Array<any>=[];
 
 constructor(
-  public plt :Platform
+  public plt :Platform,
+  public storage:Storage,
+  public file:File
 ) { }
 
   ngOnInit() {
-  //   this.canvasElements = this.canvas.nativeElement;
-  //   this.canvasElements.itemHeight=500;
-  //   this.canvasElements = this.canvasElements.getContext('2d');
-  //  this.canvasElements.fillStyle = "#3e3e3e";
-  //  this.canvasElements.fillRect(0, 0, 500, 500);
+
+  this.storage.get("painting").then(data=>{
+    console.log(data);
+    this.stored_images = data;
+  
+  }).catch(e=>{
+    console.log(e);
+  });
+
   }
 
    ionViewDidEnter(){
@@ -44,7 +52,7 @@ constructor(
 
 ionViewDidLoad(){
   this.canvasElements = this.canvas.nativeElement;
-    this.canvasElements.height=300;
+    this.canvasElements.height=800;
     this.canvasElements.width = this.plt.width()+'';
      this.canvasElements = this.canvasElements.getContext('2d');
    this.canvasElements.fillStyle = "#3e3e3e";
@@ -57,7 +65,18 @@ ionViewDidLoad(){
   }
 
   removeImageAtIndex(index){
-
+       let removed = this.stored_images.splice(index,1)
+       this.file.removeFile(this.file.dataDirectory,removed[0].imge).then(removed=>{
+         console.log("remved");
+       }).catch(e=>{
+         console.log(e);
+       });
+       this.storage.set("painting",this.stored_images);
+  }
+  getImagePath(name){
+    let path = this.file.dataDirectory + name;
+    //path = normalizeUrl(path);
+    return path
   }
   touchStart($event){
     let convasPosition = this.canvas.nativeElement.getBoundingClientRect();
@@ -84,5 +103,69 @@ ionViewDidLoad(){
     this.saveX = currentX;
      console.log("value");
   }
+
+
+  async  saveImage(){
+    let dataUrl= await this.canvas.nativeElement.toDataURL();
+   // let data = this.canvasElements.getDataUrl();
+    console.log(dataUrl);
+    let ctx = this.canvas.nativeElement.getContext('2d');
+     ctx.clearRect(0,0,ctx.canvas.width,800);
+     let name = new Date().getTime() + '.png';
+     let path = this.file.dataDirectory;
+     let data = dataUrl.split(',')[1];
+  let blob = await this.base64ToBlob(data,'image/png');
+  await this.file.writeFile(path,name,blob);
+     this.storeImage(name);
+   //.then(res=>{
+  //   this.storeImage(name);
+  // }).catch(e=>{
+  //   console.log(e);
+  // });
+
+  }
+  storeImage(name){
+    
+               let storeObj = {"img":name};
+               console.log(storeObj);
+               this.stored_images.push({"img":name});
+               this.storage.set("painting",this.stored_images).then(suc=>{
+                 console.log("image stored success");
+                 setTimeout(()=>{
+                  this.content.scrollToBottom();
+                  },500)
+               }).catch(e=>{
+                 console.log(e);
+               });
+
+
+  }
+
+
+
+  base64ToBlob(base_64_data,content_type){
+content_type = content_type||'';
+let slice_size = 512;
+let byte_charactor=atob(base_64_data);
+let byte_arrays=[];
+     for(let offset=0;offset<=byte_charactor.length; offset+=slice_size){
+       let slice = byte_charactor.slice(offset,offset+slice_size);
+       let byte_number = new Array(slice.length);
+           for(let i = 0; i<=slice.length;i++){
+             byte_number[i]=slice.charCodeAt[i];
+           }
+           let byte_array:any = new Uint8Array(byte_number);
+           byte_arrays.push(byte_array);
+     }
+ let blob = new Blob(byte_arrays,{type:content_type});
+      return blob;
+  }
+
+
+
+
+
+
+
 
 }

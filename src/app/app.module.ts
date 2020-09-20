@@ -7,8 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {environment} from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-
-
+import { IonicStorageModule } from '@ionic/storage';
+import { File } from '@ionic-native/file/ngx';
 import { AppComponent } from './app.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -22,6 +22,7 @@ import { DocumentViewer,DocumentViewerOptions} from '@ionic-native/document-view
   imports: [
     BrowserModule,
      IonicModule.forRoot(), 
+     IonicStorageModule.forRoot(),
     //AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule],
   providers: [
@@ -29,6 +30,7 @@ import { DocumentViewer,DocumentViewerOptions} from '@ionic-native/document-view
     SplashScreen,
     AngularFirestore,
     Media,
+    File,
     AngularFireStorageModule,
     { provide: RouteReuseStrategy,
      useClass: IonicRouteStrategy }
