@@ -16,6 +16,9 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
 //import { AngularFirestoreModule } from '@angular/fire/storage';
 //import { AngularFirestore } from '@angular/fire/firestore/ngx'
 import { DocumentViewer,DocumentViewerOptions} from '@ionic-native/document-viewer/ngx';
+import { ShareModule } from './share/share.module';
+// import { HideDirectiveDirective } from './directives/hide-directive.directive';
+// import { FadeDirectiveDirective } from './directives/fade-directive.directive';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,12 +26,14 @@ import { DocumentViewer,DocumentViewerOptions} from '@ionic-native/document-view
     BrowserModule,
      IonicModule.forRoot(), 
      IonicStorageModule.forRoot(),
+     ShareModule,
     //AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
     AngularFirestore,
+    
     Media,
     File,
     AngularFireStorageModule,

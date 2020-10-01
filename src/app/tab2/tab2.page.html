@@ -1,12 +1,17 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar #toolbar>
     <ion-title>
       Take Photo
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
+<!-- use fadeheader directive to display header at scroll and hide at initial time  
+  and also use ion-header and ion-content csss  -->
+<ion-content [fullscreen]="true" [appFadeDirective]="toolbar" scrollEvents="true">
+  <!-- 
+     to use when need header display at initial time but hide at scroll and dont use header and contentcsss
+    <ion-content [fullscreen]="true" [appHideDirective]="toolbar" scrollEvents="true"></ion-content>
+   -->
   <ion-fab >
     <ion-fab-button (click)="addPhotoToGallery()">
       <ion-icon name="camera"></ion-icon>

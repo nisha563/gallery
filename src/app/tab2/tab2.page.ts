@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { PhotosService} from '../services/photos.service';
 import {ActionSheetController } from '@ionic/angular';
+import{ShareModule} from '../share/share.module';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
